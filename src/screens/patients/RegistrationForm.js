@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
-import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Snackbar from '@mui/material/Snackbar';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-function Patients() {
+function RegistrationForm() {
+  const formRef = useRef();
+
+  // states for snackbar
+  const [openError, setOpenError] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openWarning, setOpenWarning] = useState(false);
+
+  // states for controlled form
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -21,46 +31,54 @@ function Patients() {
   const [city, setCity] = useState('');
 
   const onClickRegister = () => {
-    const patientData = {
-      name,
-      surname,
-      email,
-      dni,
-      address: {
-        street,
-        number: streetNumber,
-        province,
-        city,
-      },
-    };
-
-    try {
-      fetch(' http://localhost:8082/patients', {
-        method: 'POST',
-        body: JSON.stringify(patientData),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+    if (formRef.current.reportValidity()) {
+      // BACKEND: este es el body para el POST crear paciente. cambiar aca el nombre de la propiedad a el que se use en el backend para crear nuevo paciente. Por ejemplo, si el backend esperaba la variable nombre, modificar la linea 37 de 'name,' a 'nombre: name,'
+      const patientData = {
+        name,
+        surname,
+        email,
+        dni,
+        address: {
+          street,
+          number: streetNumber,
+          province,
+          city,
         },
-      })
-        .then((response) => response.json())
-        .then((json) => console.log('post response', json));
-    } catch (err) {
-      console.error(err);
-    }
+      };
 
-    setName('');
-    setSurname('');
-    setEmail('');
-    setDni('');
-    setStreet('');
-    setStreetNumber('');
-    setProvince('');
-    setCity('');
+      // BACKEND: en la linea 51, cambiar aca el endpoint para POST crear nuevo paciente
+      try {
+        fetch('http://localhost:8082/patients', {
+          method: 'POST',
+          body: JSON.stringify(patientData),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => console.log('post response', json));
+        setOpenSuccess(true);
+      } catch (err) {
+        setOpenError(true);
+        console.error(err);
+      }
+
+      setName('');
+      setSurname('');
+      setEmail('');
+      setDni('');
+      setStreet('');
+      setStreetNumber('');
+      setProvince('');
+      setCity('');
+    } else {
+      setOpenWarning(true);
+    }
   };
 
   return (
-    <Container maxWidth="lg">
-      <Box mt={4}>
+    <>
+      <Box component="form" ref={formRef}>
         <Card variant="outlined">
           <CardContent>
             <Container>
@@ -69,7 +87,7 @@ function Patients() {
               </Typography>
 
               <Grid container spacing={2}>
-                <Grid item>
+                <Grid item sx={{ display: 'flex', gap: '10px' }}>
                   <TextField
                     label="name"
                     name="name"
@@ -94,6 +112,7 @@ function Patients() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email"
                     required
+                    type="email"
                     value={email}
                     variant="outlined"
                   />
@@ -107,7 +126,7 @@ function Patients() {
                     variant="outlined"
                   />
                 </Grid>
-                <Grid item>
+                <Grid item sx={{ display: 'flex', gap: '10px' }}>
                   <TextField
                     label="street"
                     name="street"
@@ -157,8 +176,34 @@ function Patients() {
           </CardActions>
         </Card>
       </Box>
-    </Container>
+      <Snackbar
+        autoHideDuration={6000}
+        onClose={() => setOpenError(false)}
+        open={openError}
+      >
+        <Alert onClose={() => setOpenError(false)} severity="error">
+          Opps, there has been an error.
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        autoHideDuration={6000}
+        onClose={() => setOpenWarning(false)}
+        open={openWarning}
+      >
+        <Alert onClose={() => setOpenWarning(false)} severity="warning">
+          Please fill the form
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        autoHideDuration={6000}
+        onClose={() => setOpenSuccess(false)}
+        open={openSuccess}
+      >
+        <Alert onClose={() => setOpenSuccess(false)} severity="success">
+          The new patient has been registered!
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
-
-export default Patients;
+export default RegistrationForm;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Patients from './screens/Patients';
+import Patients from './screens/patients';
 import Home from './screens/Home';
-import Odontologists from './screens/Odontologists';
-import Appointments from './screens/Appointments';
+import Odontologists from './screens/odontologists';
+import Appointments from './screens/appointments';
 import Navbar from './components/navbar/Navbar';
 
 function App() {
