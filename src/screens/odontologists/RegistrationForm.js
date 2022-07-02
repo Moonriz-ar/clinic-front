@@ -65,7 +65,7 @@ function RegistrationForm() {
         <Card variant="outlined">
           <CardContent>
             <Container>
-              <Typography component="div" gutterBottom variant="h4">
+              <Typography component="div" gutterBottom variant="h5">
                 Register new odontologist
               </Typography>
 

@@ -5,7 +5,7 @@ import Patients from './screens/patients';
 import Home from './screens/Home';
 import Odontologists from './screens/odontologists';
 import Appointments from './screens/appointments';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/navbar';
 
 function App() {
   return (

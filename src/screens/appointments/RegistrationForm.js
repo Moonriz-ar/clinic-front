@@ -29,7 +29,7 @@ function RegistrationForm() {
   // state for controlled form
   const [patientId, setPatientId] = useState('');
   const [odontologistId, setOdontologistId] = useState('');
-  const [dateTime, setDateTime] = useState(Date.now());
+  const [dateTime, setDateTime] = useState('');
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -110,7 +110,7 @@ function RegistrationForm() {
         <Card variant="outlined">
           <CardContent>
             <Container>
-              <Typography component="div" gutterBottom variant="h4">
+              <Typography component="div" gutterBottom variant="h5">
                 Register new appointment
               </Typography>
               <Box sx={{ display: 'flex', gap: '10px' }}>

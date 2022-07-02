@@ -2,7 +2,6 @@ import React from 'react';
 
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 
 import { LiStyled, LinkStyled, UlStyled } from './styles';
 
