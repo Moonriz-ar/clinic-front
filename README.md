@@ -1,6 +1,6 @@
 ## Front end para el proyecto final clinica backend
 
-En el directorio del proyecto, ingresa el comando: `npm start` para correr el front en [http://localhost:3000](http://localhost:3000).
+En el directorio del proyecto, ingresa el comando: `npm install` y luego `npm start` para correr el front en [http://localhost:3000](http://localhost:3000).
 
 ### Customizar el front para tu backend
 
