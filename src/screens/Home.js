@@ -12,7 +12,7 @@ function Home() {
     <Container maxWidth="lg">
       <Box mt={5} mb={4}>
         <Typography variant="h6">
-          Hi! Please follow below steps to test the clinic backend.
+          Hi! Please follow below steps to test the clinic project.
         </Typography>
       </Box>
       <Box mb={4}>

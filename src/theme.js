@@ -1,6 +1,7 @@
 // A custom theme for this app
 import { createTheme } from '@mui/material/styles';
 
+// BACKEND: aca pueden cambiar el color principal si tienen ganas, en la linea 7
 const theme = createTheme({
   palette: {
     primary: {
