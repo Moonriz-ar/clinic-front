@@ -2,6 +2,10 @@
 
 En el directorio del proyecto, ingresa el comando: `npm install` y luego `npm start` para correr el front en [http://localhost:3000](http://localhost:3000).
 
+!!! IMPORTANTE !!! En el backend hay que agregar `@CrossOrigin(origins = "http://localhost:3000")` en todos los controllers, para que no salte un error entre la comunicacion del front y del back
+
+![image](https://user-images.githubusercontent.com/55898995/177223959-72d6dc5c-fe47-4304-9320-3c3df844490d.png)
+
 ### Customizar el front para tu backend
 
 En la lupita, buscar `BACKEND`, ver los comentarios en los archivos y realizar los cambios necesarios de `url de endpoint` y `nombres de atributos de entidades`
